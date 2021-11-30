@@ -20,8 +20,6 @@ def create_account():
         return abort(400)
 
     acct_name = str(request.get_json()["name"]).lower()
-    print(acct_name)
-    print(request.get_json())
     if not acct_name.isalnum():
         return jsonify({"message":"Invalid account name. Must be alphanumeric characters."}), 400
 
@@ -35,7 +33,6 @@ def create_account():
 @app.route("/account/<string:name>", methods=["GET"])
 def get_account(name):
     for account in accounts:
-        print(account, name)
         if account["name"] == name.lower():
             return jsonify(account), 200
     return abort(404)
